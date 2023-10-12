@@ -1,17 +1,17 @@
-import {normalizeURL, getURLsFromHTML} from './crawl.js'
+import {crawlPage} from './crawl.js'
 
-const urlTest = normalizeURL('https://binshadcs.com/login');
-console.log(urlTest);
-const inputHtml = `
-     <html>
-     <body>
-        <a href="https://sample.com"> Click here </a>
-        <h2> Heading 2 here </h2>
-        <a href="https://bcs.com"> Bcs </a>
-    </body>
-    </html>
-`
-const urlFromHtml = getURLsFromHTML(inputHtml)
+function main(){
+    if(process.argv.length < 3){
+        console.log("No website provided");
+        process.exit(1);
+    }
+    if(process.argv.length > 3){
+        console.log("Too many commnad line args");
+        process.exit(1);
+    }
+    const baseURL = process.argv[2];
+    console.log(`starting crawl of ${baseURL}`);
+    crawlPage(baseURL);
 
-console.log(urlFromHtml);
-console.log('Hello World!');
+}
+main();
